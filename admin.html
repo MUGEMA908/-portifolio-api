@@ -1,0 +1,1157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Admin · NIYONSABA Eugene Portfolio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&display=swap" rel="stylesheet" />
+  <style>
+    /* ── RESET & VARS ──────────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --green:      #00e5a0;
+      --green-dim:  rgba(0,229,160,0.10);
+      --green-b:    rgba(0,229,160,0.25);
+      --green-bord: rgba(0,229,160,0.18);
+      --blue:       #79c0ff;
+      --red:        #f87171;
+      --amber:      #fbbf24;
+      --bg:         #0a0f0d;
+      --surface:    #111714;
+      --surface2:   #162019;
+      --border:     rgba(0,229,160,0.14);
+      --text:       #e8f0ec;
+      --muted:      #6b8075;
+      --font:       'Times New Roman', Georgia, serif;
+      --display:    'Cinzel', 'Times New Roman', serif;
+      --radius:     13px;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: var(--font);
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+    }
+
+    body::before {
+      content: '';
+      position: fixed; inset: 0;
+      background:
+        radial-gradient(ellipse 70% 60% at 15% 10%, rgba(0,229,160,0.05) 0%, transparent 55%),
+        radial-gradient(ellipse 50% 70% at 85% 90%, rgba(121,192,255,0.04) 0%, transparent 55%);
+      pointer-events: none; z-index: 0;
+    }
+
+    /* ── SCREENS ───────────────────────────────────────────── */
+    .screen { display: none; position: relative; z-index: 1; }
+    .screen.visible { display: block; }
+
+    /* ════════════════════════════════════════════════════════
+       LOGIN SCREEN
+    ════════════════════════════════════════════════════════ */
+    #loginScreen {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem 1rem;
+    }
+
+    .login-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: clamp(2rem, 5vw, 3rem);
+      width: 100%;
+      max-width: 420px;
+      box-shadow: 0 30px 80px rgba(0,0,0,0.5);
+      animation: fadeUp 0.5s ease both;
+    }
+
+    @keyframes fadeUp {
+      from { opacity:0; transform:translateY(24px); }
+      to   { opacity:1; transform:translateY(0); }
+    }
+
+    .login-logo {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin-bottom: 2.5rem;
+    }
+
+    .ne-circle {
+      width: 52px; height: 52px;
+      background: radial-gradient(circle at 40% 35%, #0d4a2e, #051a0f);
+      border: 2px solid var(--green-b);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      box-shadow: 0 0 20px rgba(0,229,160,0.2);
+    }
+
+    .ne-circle span {
+      font-family: var(--display);
+      font-weight: 700; font-size: 1rem;
+      color: var(--green);
+      letter-spacing: 0.06em;
+    }
+
+    .login-logo-text h2 {
+      font-family: var(--display);
+      font-size: 1.1rem; font-weight: 700;
+      letter-spacing: 0.04em;
+    }
+
+    .login-logo-text p {
+      font-size: 0.78rem;
+      color: var(--muted);
+      margin-top: 2px;
+    }
+
+    .login-title {
+      font-family: var(--display);
+      font-size: 1.5rem; font-weight: 700;
+      margin-bottom: 0.4rem;
+      letter-spacing: 0.03em;
+    }
+
+    .login-subtitle {
+      font-size: 0.85rem;
+      color: var(--muted);
+      margin-bottom: 2rem;
+      line-height: 1.6;
+    }
+
+    .field {
+      margin-bottom: 1.25rem;
+    }
+
+    .field label {
+      display: block;
+      font-size: 0.78rem;
+      color: var(--muted);
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      margin-bottom: 0.5rem;
+    }
+
+    .field input {
+      width: 100%;
+      font-family: var(--font);
+      font-size: 0.95rem;
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 12px 16px;
+      color: var(--text);
+      outline: none;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+
+    .field input:focus {
+      border-color: var(--green-b);
+      box-shadow: 0 0 0 3px rgba(0,229,160,0.08);
+    }
+
+    .field input::placeholder { color: var(--muted); }
+
+    .login-btn {
+      width: 100%;
+      font-family: var(--font);
+      font-size: 1rem; font-weight: 700;
+      background: var(--green);
+      color: #0a0f0d;
+      border: none;
+      border-radius: 10px;
+      padding: 13px;
+      cursor: pointer;
+      transition: background 0.2s, transform 0.15s, box-shadow 0.2s;
+      margin-top: 0.5rem;
+      letter-spacing: 0.03em;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+    }
+
+    .login-btn:hover:not(:disabled) {
+      background: #00ffb3;
+      transform: translateY(-2px);
+      box-shadow: 0 6px 22px rgba(0,229,160,0.32);
+    }
+
+    .login-btn:disabled { opacity: 0.6; cursor: not-allowed; transform: none; }
+
+    .login-error {
+      margin-top: 1rem;
+      background: rgba(248,113,113,0.1);
+      border: 1px solid rgba(248,113,113,0.3);
+      border-radius: 9px;
+      padding: 10px 14px;
+      font-size: 0.83rem;
+      color: var(--red);
+      display: none;
+    }
+
+    .back-link {
+      display: block;
+      text-align: center;
+      margin-top: 1.5rem;
+      font-size: 0.82rem;
+      color: var(--muted);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .back-link:hover { color: var(--green); }
+
+    /* ════════════════════════════════════════════════════════
+       DASHBOARD SCREEN
+    ════════════════════════════════════════════════════════ */
+    #dashScreen { min-height: 100vh; }
+
+    /* Top bar */
+    .topbar {
+      position: sticky; top: 0; z-index: 100;
+      background: rgba(10,15,13,0.94);
+      backdrop-filter: blur(18px);
+      border-bottom: 1px solid var(--border);
+      padding: 0 clamp(1rem,4vw,2rem);
+      height: 62px;
+      display: flex; align-items: center; gap: 14px;
+    }
+
+    .topbar-logo {
+      display: flex; align-items: center; gap: 10px;
+      text-decoration: none; color: var(--text);
+    }
+
+    .tb-circle {
+      width: 36px; height: 36px;
+      background: radial-gradient(circle at 40% 35%, #0d4a2e, #051a0f);
+      border: 1.5px solid var(--green-b);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-family: var(--display);
+      font-weight: 700; font-size: 0.75rem;
+      color: var(--green);
+    }
+
+    .tb-title {
+      font-family: var(--display);
+      font-size: 0.9rem; font-weight: 600;
+      letter-spacing: 0.04em;
+    }
+
+    .tb-badge {
+      font-size: 0.7rem;
+      background: var(--green-dim);
+      border: 1px solid var(--green-bord);
+      color: var(--green);
+      padding: 3px 10px; border-radius: 100px;
+      letter-spacing: 0.05em;
+    }
+
+    .tb-right {
+      margin-left: auto;
+      display: flex; align-items: center; gap: 10px;
+    }
+
+    .tb-admin {
+      font-size: 0.8rem; color: var(--muted);
+    }
+
+    .tb-view-site {
+      font-family: var(--font);
+      font-size: 0.8rem;
+      color: var(--muted);
+      border: 1px solid var(--border);
+      border-radius: 7px;
+      padding: 5px 12px;
+      text-decoration: none;
+      transition: all 0.2s;
+    }
+
+    .tb-view-site:hover { color: var(--green); border-color: var(--green-bord); }
+
+    .logout-btn {
+      font-family: var(--font);
+      font-size: 0.8rem;
+      color: var(--red);
+      background: rgba(248,113,113,0.08);
+      border: 1px solid rgba(248,113,113,0.2);
+      border-radius: 7px;
+      padding: 5px 12px;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .logout-btn:hover { background: rgba(248,113,113,0.15); }
+
+    /* Main content */
+    .dash-body {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 2rem clamp(1rem,4vw,2rem) 4rem;
+    }
+
+    /* Stats grid */
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 1rem;
+      margin-bottom: 2.5rem;
+    }
+
+    .sc {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.4rem 1.5rem;
+      transition: border-color 0.2s, transform 0.2s;
+    }
+
+    .sc:hover { border-color: var(--green-b); transform: translateY(-3px); }
+
+    .sc-icon { font-size: 1.4rem; margin-bottom: 0.6rem; }
+
+    .sc-n {
+      font-family: var(--display);
+      font-size: 2.2rem; font-weight: 700;
+      color: var(--green); line-height: 1;
+    }
+
+    .sc-n.red   { color: var(--red); }
+    .sc-n.amber { color: var(--amber); }
+
+    .sc-l {
+      font-size: 0.78rem; color: var(--muted);
+      margin-top: 4px; letter-spacing: 0.04em;
+    }
+
+    /* Tabs */
+    .tabs-row {
+      display: flex; gap: 4px;
+      border-bottom: 1px solid var(--border);
+      margin-bottom: 1.75rem;
+    }
+
+    .tab {
+      font-family: var(--font);
+      font-size: 0.88rem;
+      padding: 10px 20px;
+      border: none; background: transparent;
+      color: var(--muted);
+      cursor: pointer; border-radius: 8px 8px 0 0;
+      transition: all 0.2s;
+      border-bottom: 2px solid transparent;
+      margin-bottom: -1px;
+    }
+
+    .tab:hover   { color: var(--text); }
+    .tab.active  { color: var(--green); border-bottom-color: var(--green); }
+
+    .panel       { display: none; }
+    .panel.active { display: block; }
+
+    /* Messages */
+    .msg-toolbar {
+      display: flex; align-items: center; gap: 10px;
+      margin-bottom: 1.25rem; flex-wrap: wrap;
+    }
+
+    .search-box {
+      flex: 1; min-width: 200px;
+      font-family: var(--font);
+      font-size: 0.85rem;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 9px;
+      padding: 9px 14px;
+      color: var(--text); outline: none;
+      transition: border-color 0.2s;
+    }
+
+    .search-box:focus { border-color: var(--green-b); }
+    .search-box::placeholder { color: var(--muted); }
+
+    .filter-btn {
+      font-family: var(--font);
+      font-size: 0.8rem;
+      padding: 8px 14px; border-radius: 8px;
+      border: 1px solid var(--border);
+      background: transparent; color: var(--muted);
+      cursor: pointer; transition: all 0.2s;
+    }
+
+    .filter-btn.on, .filter-btn:hover {
+      color: var(--green); border-color: var(--green-bord);
+      background: var(--green-dim);
+    }
+
+    .msg-list { display: flex; flex-direction: column; gap: 12px; }
+
+    .msg-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.25rem 1.5rem;
+      transition: border-color 0.2s, transform 0.2s;
+      animation: fadeUp 0.3s ease both;
+    }
+
+    .msg-card.unread { border-left: 3px solid var(--green); }
+    .msg-card:hover  { border-color: var(--green-b); transform: translateY(-2px); }
+
+    .msg-top {
+      display: flex; align-items: flex-start;
+      gap: 10px; margin-bottom: 0.75rem; flex-wrap: wrap;
+    }
+
+    .msg-name   { font-weight: 700; font-size: 0.98rem; }
+    .msg-email  { font-size: 0.8rem; color: var(--green); }
+    .msg-time   { font-size: 0.73rem; color: var(--muted); margin-left: auto; white-space: nowrap; }
+
+    .new-badge {
+      font-size: 0.66rem; background: var(--green);
+      color: #0a0f0d; padding: 2px 9px;
+      border-radius: 100px; font-weight: 700;
+      align-self: center;
+    }
+
+    .msg-body {
+      font-size: 0.88rem; color: #9ab5ac;
+      line-height: 1.75; white-space: pre-wrap;
+    }
+
+    .msg-actions {
+      display: flex; gap: 8px; margin-top: 1rem;
+      padding-top: 1rem; border-top: 1px solid var(--border);
+      flex-wrap: wrap;
+    }
+
+    .act-btn {
+      font-family: var(--font);
+      font-size: 0.78rem;
+      padding: 6px 14px; border-radius: 7px;
+      cursor: pointer; transition: all 0.2s;
+      text-decoration: none; display: inline-flex;
+      align-items: center; gap: 5px;
+    }
+
+    .act-reply  { background: var(--green); color: #0a0f0d; font-weight: 700; border: none; }
+    .act-reply:hover { background: #00ffb3; }
+
+    .act-read   { background: transparent; color: var(--muted); border: 1px solid var(--border); }
+    .act-read:hover { color: var(--green); border-color: var(--green-bord); }
+
+    .act-del    { background: transparent; color: var(--red); border: 1px solid rgba(248,113,113,0.2); }
+    .act-del:hover { background: rgba(248,113,113,0.1); }
+
+    .read-stamp { font-size: 0.75rem; color: var(--muted); align-self: center; }
+
+    /* Analytics */
+    .analytics-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.25rem;
+    }
+
+    @media (max-width: 640px) {
+      .analytics-grid { grid-template-columns: 1fr; }
+    }
+
+    .an-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.5rem;
+    }
+
+    .an-card h3 {
+      font-family: var(--display);
+      font-size: 0.95rem; font-weight: 600;
+      letter-spacing: 0.04em; margin-bottom: 1.5rem;
+      color: var(--green);
+    }
+
+    .proj-bar-row {
+      display: flex; align-items: center;
+      gap: 12px; margin-bottom: 1rem;
+    }
+
+    .pb-name {
+      font-size: 0.82rem; font-weight: 600;
+      min-width: 130px;
+    }
+
+    .pb-track {
+      flex: 1; height: 8px;
+      background: rgba(0,229,160,0.08);
+      border-radius: 100px; overflow: hidden;
+    }
+
+    .pb-fill {
+      height: 100%; background: var(--green);
+      border-radius: 100px;
+      transition: width 1s cubic-bezier(.4,0,.2,1);
+    }
+
+    .pb-n {
+      font-family: var(--display);
+      font-size: 1rem; font-weight: 700;
+      color: var(--green); min-width: 28px;
+      text-align: right;
+    }
+
+    /* Recent visitors */
+    .recent-row {
+      display: flex; align-items: center;
+      gap: 10px; padding: 10px 0;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .recent-row:last-child { border-bottom: none; }
+
+    .r-avatar {
+      width: 34px; height: 34px;
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 0.85rem; flex-shrink: 0;
+    }
+
+    .r-name  { font-size: 0.88rem; font-weight: 600; }
+    .r-email { font-size: 0.76rem; color: var(--muted); }
+    .r-time  { font-size: 0.72rem; color: var(--muted); margin-left: auto; }
+
+    /* Empty / loading states */
+    .empty-state {
+      text-align: center;
+      padding: 4rem 2rem;
+      color: var(--muted);
+      font-size: 0.9rem;
+    }
+
+    .empty-state .ei { font-size: 2.5rem; display: block; margin-bottom: 1rem; }
+
+    .spinner {
+      display: inline-block; width: 20px; height: 20px;
+      border: 2px solid var(--border);
+      border-top-color: var(--green);
+      border-radius: 50%;
+      animation: spin 0.7s linear infinite;
+      vertical-align: middle; margin-right: 6px;
+    }
+
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    /* Toast */
+    #toast {
+      position: fixed; bottom: 1.5rem; right: 1.5rem;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 0.85rem 1.25rem;
+      font-size: 0.83rem;
+      z-index: 999;
+      max-width: 320px;
+      transform: translateY(20px);
+      opacity: 0; pointer-events: none;
+      transition: all 0.3s;
+    }
+
+    #toast.show { opacity: 1; transform: translateY(0); pointer-events: all; }
+    #toast.ok   { border-color: var(--green); color: var(--green); }
+    #toast.err  { border-color: var(--red);   color: var(--red); }
+
+    /* Confirm dialog */
+    .confirm-overlay {
+      position: fixed; inset: 0;
+      background: rgba(0,0,0,0.75);
+      backdrop-filter: blur(6px);
+      z-index: 500;
+      display: flex; align-items: center; justify-content: center;
+      padding: 1.5rem;
+      opacity: 0; pointer-events: none;
+      transition: opacity 0.25s;
+    }
+
+    .confirm-overlay.open { opacity: 1; pointer-events: all; }
+
+    .confirm-box {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 2rem; max-width: 360px; width: 100%;
+      transform: scale(0.95);
+      transition: transform 0.25s;
+    }
+
+    .confirm-overlay.open .confirm-box { transform: scale(1); }
+
+    .confirm-box h3 {
+      font-family: var(--display);
+      font-size: 1.1rem; margin-bottom: 0.6rem;
+    }
+
+    .confirm-box p { font-size: 0.88rem; color: var(--muted); margin-bottom: 1.5rem; line-height: 1.6; }
+
+    .confirm-btns { display: flex; gap: 10px; }
+
+    .confirm-del {
+      font-family: var(--font); flex: 1;
+      padding: 10px; border-radius: 9px;
+      background: var(--red); color: #fff;
+      border: none; cursor: pointer;
+      font-size: 0.88rem; font-weight: 700;
+      transition: opacity 0.2s;
+    }
+
+    .confirm-del:hover { opacity: 0.85; }
+
+    .confirm-cancel {
+      font-family: var(--font); flex: 1;
+      padding: 10px; border-radius: 9px;
+      background: transparent; color: var(--text);
+      border: 1px solid var(--border);
+      cursor: pointer; font-size: 0.88rem;
+      transition: border-color 0.2s;
+    }
+
+    .confirm-cancel:hover { border-color: var(--green-bord); }
+
+    /* Responsive */
+    @media (max-width: 600px) {
+      .tb-admin, .tb-view-site { display: none; }
+      .stats-grid { grid-template-columns: 1fr 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ════════════════════════════════════════════════════════
+     LOGIN SCREEN
+════════════════════════════════════════════════════════ -->
+<div id="loginScreen" class="screen visible">
+  <div class="login-card">
+
+    <div class="login-logo">
+      <div class="ne-circle"><span>NE</span></div>
+      <div class="login-logo-text">
+        <h2>NIYONSABA Eugene</h2>
+        <p>Portfolio Admin Panel</p>
+      </div>
+    </div>
+
+    <h1 class="login-title">Welcome back 👋</h1>
+    <p class="login-subtitle">Sign in to view messages, track recruiter activity, and manage your portfolio data.</p>
+
+    <div class="field">
+      <label for="loginEmail">Email Address</label>
+      <input type="email" id="loginEmail" placeholder="eugene@gmail.com"
+             value="eugene@gmail.com" autocomplete="email" />
+    </div>
+
+    <div class="field">
+      <label for="loginPass">Password</label>
+      <input type="password" id="loginPass" placeholder="••••••"
+             value="123" autocomplete="current-password" />
+    </div>
+
+    <button class="login-btn" id="loginBtn" onclick="doLogin()">
+      🔐 Sign In
+    </button>
+
+    <div class="login-error" id="loginError"></div>
+
+    <a href="index.html" class="back-link">← Back to portfolio</a>
+  </div>
+</div>
+
+
+<!-- ════════════════════════════════════════════════════════
+     DASHBOARD SCREEN
+════════════════════════════════════════════════════════ -->
+<div id="dashScreen" class="screen">
+
+  <!-- Top bar -->
+  <nav class="topbar">
+    <a href="admin.html" class="topbar-logo">
+      <div class="tb-circle">NE</div>
+      <span class="tb-title">Admin Dashboard</span>
+    </a>
+    <span class="tb-badge">🟢 Live</span>
+    <div class="tb-right">
+      <span class="tb-admin" id="tbAdminLabel">eugene@gmail.com</span>
+      <a href="index.html" class="tb-view-site">← View Site</a>
+      <button class="logout-btn" onclick="doLogout()">Logout</button>
+    </div>
+  </nav>
+
+  <!-- Body -->
+  <div class="dash-body">
+
+    <!-- Stats -->
+    <div class="stats-grid" id="statsGrid">
+      <div class="sc"><div class="sc-icon">📩</div><div class="sc-n" id="st-total">—</div><div class="sc-l">Total messages</div></div>
+      <div class="sc"><div class="sc-icon">🔔</div><div class="sc-n red" id="st-unread">—</div><div class="sc-l">Unread messages</div></div>
+      <div class="sc"><div class="sc-icon">👁</div><div class="sc-n" id="st-views">—</div><div class="sc-l">Case study opens</div></div>
+      <div class="sc"><div class="sc-icon">💻</div><div class="sc-n amber" id="st-github">—</div><div class="sc-l">GitHub clicks</div></div>
+    </div>
+
+    <!-- Tabs -->
+    <div class="tabs-row">
+      <button class="tab active" id="tab-msgs"     onclick="switchTab('msgs')">📩 Messages</button>
+      <button class="tab"        id="tab-analytics" onclick="switchTab('analytics')">📊 Analytics</button>
+    </div>
+
+    <!-- Messages panel -->
+    <div class="panel active" id="panel-msgs">
+      <div class="msg-toolbar">
+        <input class="search-box" id="searchBox" type="text"
+               placeholder="Search by name or email…" oninput="renderMessages()" />
+        <button class="filter-btn" id="filterUnread" onclick="toggleFilter()">Unread only</button>
+        <button class="filter-btn" onclick="loadAll()">🔄 Refresh</button>
+      </div>
+      <div class="msg-list" id="msgList">
+        <div class="empty-state"><span class="ei">📡</span>Loading messages…</div>
+      </div>
+    </div>
+
+    <!-- Analytics panel -->
+    <div class="panel" id="panel-analytics">
+      <div class="analytics-grid">
+
+        <!-- Project views -->
+        <div class="an-card">
+          <h3>🔍 Project Case Study Opens</h3>
+          <div id="projBars">
+            <div class="empty-state" style="padding:2rem 0;"><span class="spinner"></span>Loading…</div>
+          </div>
+        </div>
+
+        <!-- Recent contacts -->
+        <div class="an-card">
+          <h3>🕐 Recent Contacts</h3>
+          <div id="recentList">
+            <div class="empty-state" style="padding:2rem 0;"><span class="spinner"></span>Loading…</div>
+          </div>
+        </div>
+
+        <!-- GitHub clicks -->
+        <div class="an-card">
+          <h3>💻 GitHub Interest</h3>
+          <div id="githubBlock">
+            <div class="empty-state" style="padding:2rem 0;"><span class="spinner"></span>Loading…</div>
+          </div>
+        </div>
+
+        <!-- Summary -->
+        <div class="an-card">
+          <h3>📋 Quick Summary</h3>
+          <div id="summaryBlock">
+            <div class="empty-state" style="padding:2rem 0;"><span class="spinner"></span>Loading…</div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+  </div><!-- /.dash-body -->
+</div><!-- /#dashScreen -->
+
+
+<!-- Delete confirm dialog -->
+<div class="confirm-overlay" id="confirmOverlay">
+  <div class="confirm-box">
+    <h3>Delete message?</h3>
+    <p>This will permanently remove the message from your MongoDB database. This cannot be undone.</p>
+    <div class="confirm-btns">
+      <button class="confirm-del"    id="confirmYes">Delete</button>
+      <button class="confirm-cancel" onclick="hideConfirm()">Cancel</button>
+    </div>
+  </div>
+</div>
+
+<!-- Toast -->
+<div id="toast"></div>
+
+
+<script>
+// ── Config ──────────────────────────────────────────────────
+const API_BASE = 'https://portfolio-server-1cln.onrender.com';
+
+// ── State ───────────────────────────────────────────────────
+let allMessages   = [];
+let showUnreadOnly = false;
+let token         = '';
+
+// ── Helpers ─────────────────────────────────────────────────
+function toast(msg, type = 'ok') {
+  const el = document.getElementById('toast');
+  el.textContent = msg;
+  el.className   = 'show ' + type;
+  clearTimeout(el._t);
+  el._t = setTimeout(() => el.className = '', 3500);
+}
+
+function fmtDate(iso) {
+  const d = new Date(iso);
+  return d.toLocaleDateString('en-GB', { day:'2-digit', month:'short', year:'numeric' })
+    + ' ' + d.toLocaleTimeString('en-GB', { hour:'2-digit', minute:'2-digit' });
+}
+
+function esc(s) {
+  return String(s)
+    .replace(/&/g,'&amp;').replace(/</g,'&lt;')
+    .replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+
+function authHeaders() {
+  return { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + token };
+}
+
+// ── LOGIN ────────────────────────────────────────────────────
+async function doLogin() {
+  const emailEl = document.getElementById('loginEmail');
+  const passEl  = document.getElementById('loginPass');
+  const btn     = document.getElementById('loginBtn');
+  const errEl   = document.getElementById('loginError');
+
+  const email    = emailEl.value.trim();
+  const password = passEl.value;
+
+  errEl.style.display = 'none';
+
+  if (!email || !password) {
+    errEl.textContent = 'Please enter your email and password.';
+    errEl.style.display = 'block';
+    return;
+  }
+
+  btn.disabled    = true;
+  btn.innerHTML   = '<span class="spinner"></span>Signing in…';
+
+  try {
+    const res  = await fetch(`${API}/api/admin/login`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ email, password })
+    });
+
+    const data = await res.json();
+
+    if (res.ok && data.token) {
+      token = data.token;
+      sessionStorage.setItem('admin_token', token);
+      sessionStorage.setItem('admin_email', data.admin?.email || email);
+      showDashboard();
+    } else {
+      errEl.textContent = data.error || 'Invalid email or password.';
+      errEl.style.display = 'block';
+    }
+
+  } catch (err) {
+    errEl.textContent = '⚠ Cannot reach server. Make sure the backend is running (cd server → npm run dev).';
+    errEl.style.display = 'block';
+  } finally {
+    btn.disabled  = false;
+    btn.innerHTML = '🔐 Sign In';
+  }
+}
+
+// Allow Enter key in password field
+document.getElementById('loginPass').addEventListener('keydown', e => {
+  if (e.key === 'Enter') doLogin();
+});
+document.getElementById('loginEmail').addEventListener('keydown', e => {
+  if (e.key === 'Enter') doLogin();
+});
+
+// ── LOGOUT ───────────────────────────────────────────────────
+function doLogout() {
+  token = '';
+  sessionStorage.removeItem('admin_token');
+  sessionStorage.removeItem('admin_email');
+  document.getElementById('dashScreen').classList.remove('visible');
+  document.getElementById('loginScreen').classList.add('visible');
+  toast('Logged out successfully');
+}
+
+// ── SHOW DASHBOARD ───────────────────────────────────────────
+function showDashboard() {
+  document.getElementById('loginScreen').classList.remove('visible');
+  document.getElementById('dashScreen').classList.add('visible');
+  const email = sessionStorage.getItem('admin_email') || 'Admin';
+  document.getElementById('tbAdminLabel').textContent = email;
+  loadAll();
+}
+
+// ── AUTO-LOGIN if token in session ──────────────────────────
+window.addEventListener('DOMContentLoaded', () => {
+  const saved = sessionStorage.getItem('admin_token');
+  if (saved) {
+    token = saved;
+    // Verify token is still valid
+    fetch(`${API}/api/admin/verify`, { headers: authHeaders() })
+      .then(r => r.json())
+      .then(d => { if (d.valid) showDashboard(); else sessionStorage.clear(); })
+      .catch(() => { /* server offline — show login */ });
+  }
+});
+
+// ── LOAD ALL DATA ────────────────────────────────────────────
+async function loadAll() {
+  await Promise.all([loadStats(), loadMessages()]);
+}
+
+async function loadStats() {
+  try {
+    const res  = await fetch(`${API}/api/stats`, { headers: authHeaders() });
+    if (res.status === 401) { doLogout(); return; }
+    const data = await res.json();
+
+    document.getElementById('st-total').textContent  = data.messages?.total  ?? '—';
+    document.getElementById('st-unread').textContent = data.messages?.unread ?? '—';
+    document.getElementById('st-github').textContent = data.githubClicks      ?? '—';
+    const totalV = Object.values(data.projectViews || {}).reduce((a,b)=>a+b,0);
+    document.getElementById('st-views').textContent  = totalV;
+
+    renderProjectBars(data.projectViews || {});
+    renderRecent(data.recentMessages    || []);
+    renderGithubBlock(data.githubClicks || 0);
+    renderSummary(data);
+
+  } catch(e) {
+    toast('⚠ Cannot reach server at ' + API, 'err');
+  }
+}
+
+async function loadMessages() {
+  try {
+    const res  = await fetch(`${API}/api/contact`, { headers: authHeaders() });
+    if (res.status === 401) { doLogout(); return; }
+    const data = await res.json();
+    allMessages = data.messages || [];
+    renderMessages();
+    toast(`✅ ${allMessages.length} message${allMessages.length!==1?'s':''} loaded (${data.unread} unread)`);
+  } catch(e) {
+    document.getElementById('msgList').innerHTML =
+      '<div class="empty-state"><span class="ei">⚠️</span>Cannot connect to server. Make sure it is running.</div>';
+  }
+}
+
+// ── RENDER MESSAGES ──────────────────────────────────────────
+function renderMessages() {
+  const query    = (document.getElementById('searchBox').value || '').toLowerCase();
+  const list     = document.getElementById('msgList');
+  let   filtered = allMessages;
+
+  if (showUnreadOnly) filtered = filtered.filter(m => !m.read);
+  if (query) filtered = filtered.filter(m =>
+    m.name.toLowerCase().includes(query) || m.email.toLowerCase().includes(query)
+  );
+
+  if (filtered.length === 0) {
+    list.innerHTML = `<div class="empty-state"><span class="ei">📭</span>${
+      showUnreadOnly ? 'No unread messages. All caught up!' :
+      query          ? 'No messages match your search.' :
+                       'No messages yet. Share your portfolio to start receiving messages!'
+    }</div>`;
+    return;
+  }
+
+  list.innerHTML = filtered.map(m => `
+    <div class="msg-card ${!m.read ? 'unread' : ''}" id="mc-${m._id}">
+      <div class="msg-top">
+        <div>
+          <div class="msg-name">${esc(m.name)}</div>
+          <div class="msg-email">${esc(m.email)}</div>
+        </div>
+        ${!m.read ? '<span class="new-badge">NEW</span>' : ''}
+        <span class="msg-time">${fmtDate(m.createdAt)}</span>
+      </div>
+      <div class="msg-body">${esc(m.message)}</div>
+      <div class="msg-actions">
+        <a class="act-btn act-reply"
+           href="mailto:${esc(m.email)}?subject=Re: Your Portfolio Enquiry&body=Hi ${esc(m.name)},%0A%0A">
+          ↩ Reply
+        </a>
+        ${!m.read
+          ? `<button class="act-btn act-read" onclick="markRead('${m._id}')">✓ Mark read</button>`
+          : `<span class="read-stamp">✓ Read</span>`}
+        <button class="act-btn act-del" onclick="askDelete('${m._id}', '${esc(m.name)}')">
+          🗑 Delete
+        </button>
+      </div>
+    </div>`).join('');
+}
+
+// ── TOGGLE UNREAD FILTER ─────────────────────────────────────
+function toggleFilter() {
+  showUnreadOnly = !showUnreadOnly;
+  document.getElementById('filterUnread').classList.toggle('on', showUnreadOnly);
+  renderMessages();
+}
+
+// ── MARK READ ────────────────────────────────────────────────
+async function markRead(id) {
+  try {
+    const res = await fetch(`${API}/api/contact/${id}/read`, {
+      method: 'PATCH', headers: authHeaders()
+    });
+    if (!res.ok) throw new Error();
+    const m = allMessages.find(x => x._id === id);
+    if (m) m.read = true;
+    renderMessages();
+    loadStats();
+    toast('✅ Marked as read');
+  } catch { toast('Could not update message.', 'err'); }
+}
+
+// ── DELETE ───────────────────────────────────────────────────
+let _deleteId = null;
+
+function askDelete(id, name) {
+  _deleteId = id;
+  document.getElementById('confirmOverlay').classList.add('open');
+  document.getElementById('confirmYes').onclick = () => confirmDelete();
+}
+
+function hideConfirm() {
+  document.getElementById('confirmOverlay').classList.remove('open');
+  _deleteId = null;
+}
+
+async function confirmDelete() {
+  hideConfirm();
+  if (!_deleteId) return;
+  try {
+    const res = await fetch(`${API}/api/contact/${_deleteId}`, {
+      method: 'DELETE', headers: authHeaders()
+    });
+    if (!res.ok) throw new Error();
+    allMessages = allMessages.filter(m => m._id !== _deleteId);
+    renderMessages();
+    loadStats();
+    toast('🗑 Message deleted');
+  } catch { toast('Could not delete message.', 'err'); }
+}
+
+// Close confirm on overlay click
+document.getElementById('confirmOverlay').addEventListener('click', e => {
+  if (e.target === document.getElementById('confirmOverlay')) hideConfirm();
+});
+
+// ── ANALYTICS RENDERERS ──────────────────────────────────────
+function renderProjectBars(views) {
+  const projects = {
+    smartveg: 'SmartVeg Rwanda',
+    sifs:     'School System (SIFS)',
+    ictshop:  'ICT Tools Shop'
+  };
+  const max = Math.max(...Object.values(views), 1);
+  const total = Object.values(views).reduce((a,b)=>a+b,0);
+
+  if (total === 0) {
+    document.getElementById('projBars').innerHTML =
+      '<div class="empty-state" style="padding:1.5rem 0;">No case study opens recorded yet.</div>';
+    return;
+  }
+
+  document.getElementById('projBars').innerHTML =
+    Object.entries(projects).map(([key, name]) => {
+      const count = views[key] || 0;
+      const pct   = Math.round((count / max) * 100);
+      return `
+        <div class="proj-bar-row">
+          <div class="pb-name">${name}</div>
+          <div class="pb-track"><div class="pb-fill" style="width:${pct}%"></div></div>
+          <div class="pb-n">${count}</div>
+        </div>`;
+    }).join('');
+}
+
+function renderRecent(msgs) {
+  if (!msgs.length) {
+    document.getElementById('recentList').innerHTML =
+      '<div class="empty-state" style="padding:1.5rem 0;">No messages yet.</div>';
+    return;
+  }
+  document.getElementById('recentList').innerHTML = msgs.map(m => `
+    <div class="recent-row">
+      <div class="r-avatar">${esc(m.name[0]).toUpperCase()}</div>
+      <div>
+        <div class="r-name">${esc(m.name)}</div>
+        <div class="r-email">${esc(m.email)}</div>
+      </div>
+      <div class="r-time">${fmtDate(m.createdAt)}</div>
+    </div>`).join('');
+}
+
+function renderGithubBlock(clicks) {
+  document.getElementById('githubBlock').innerHTML = `
+    <div style="text-align:center; padding: 1.5rem 0;">
+      <div style="font-family:'Cinzel',serif; font-size:3.5rem; font-weight:700; color:var(--amber);">
+        ${clicks}
+      </div>
+      <div style="font-size:0.82rem; color:var(--muted); margin-top:6px;">
+        Total recruiters who clicked "View on GitHub"
+      </div>
+      <a href="https://github.com/MUGEMA908" target="_blank"
+         style="display:inline-block; margin-top:1.2rem; font-size:0.8rem; color:var(--green);
+                border:1px solid var(--green-bord); border-radius:8px; padding:6px 14px;
+                text-decoration:none; transition:background 0.2s;"
+         onmouseover="this.style.background='var(--green-dim)'"
+         onmouseout="this.style.background='transparent'">
+        Open GitHub Profile ↗
+      </a>
+    </div>`;
+}
+
+function renderSummary(data) {
+  const total  = data.messages?.total  || 0;
+  const unread = data.messages?.unread || 0;
+  const views  = Object.values(data.projectViews || {}).reduce((a,b)=>a+b,0);
+  const github = data.githubClicks || 0;
+  const read   = total - unread;
+  const responseRate = total > 0 ? Math.round((read / total) * 100) : 0;
+
+  document.getElementById('summaryBlock').innerHTML = `
+    <div style="display:flex; flex-direction:column; gap:12px;">
+      <div style="display:flex; justify-content:space-between; font-size:0.88rem; padding:10px 0; border-bottom:1px solid var(--border);">
+        <span style="color:var(--muted);">Messages replied</span>
+        <span style="color:var(--green); font-weight:700;">${read} / ${total}</span>
+      </div>
+      <div style="display:flex; justify-content:space-between; font-size:0.88rem; padding:10px 0; border-bottom:1px solid var(--border);">
+        <span style="color:var(--muted);">Response rate</span>
+        <span style="color:var(--green); font-weight:700;">${responseRate}%</span>
+      </div>
+      <div style="display:flex; justify-content:space-between; font-size:0.88rem; padding:10px 0; border-bottom:1px solid var(--border);">
+        <span style="color:var(--muted);">Projects explored</span>
+        <span style="color:var(--amber); font-weight:700;">${views} times</span>
+      </div>
+      <div style="display:flex; justify-content:space-between; font-size:0.88rem; padding:10px 0;">
+        <span style="color:var(--muted);">GitHub interest</span>
+        <span style="color:var(--amber); font-weight:700;">${github} clicks</span>
+      </div>
+    </div>`;
+}
+
+// ── TABS ─────────────────────────────────────────────────────
+function switchTab(name) {
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+  document.getElementById('tab-'    + name).classList.add('active');
+  document.getElementById('panel-' + name).classList.add('active');
+}
+</script>
+</body>
+</html>
