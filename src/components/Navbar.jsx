@@ -42,12 +42,12 @@ export default function Navbar({ theme, toggleTheme }) {
 
         <button onClick={() => handleNav('home')}
           className="flex items-center gap-3 group cursor-pointer">
-          <div className={`w-11 h-11 rounded-full flex items-center justify-center border transition-all duration-300
+          <div className={`w-8 h-8 rounded-full flex items-center justify-center border transition-all duration-300
             group-hover:shadow-[0_0_28px_rgba(0,229,160,0.4)] group-hover:rotate-6
             ${theme === 'dark'
               ? 'bg-gradient-to-br from-[#0f5534] to-[#041208] border-green-border shadow-[0_0_18px_rgba(0,229,160,0.18)]'
               : 'bg-gradient-to-br from-[#d4f5e8] to-[#a8ecd2] border-[rgba(0,150,90,0.35)] shadow-[0_0_18px_rgba(0,150,90,0.15)]'}`}>
-            <span className="font-display text-[0.8rem] font-bold text-green-DEFAULT tracking-widest">NE</span>
+            <span className="font-display text-[0.6rem] font-bold text-green-DEFAULT tracking-widest">NE</span>
           </div>
           <span className={`font-display text-[0.85rem] font-semibold tracking-[0.06em] hidden sm:block
             ${theme === 'dark' ? 'text-dark-text' : 'text-light-text'}`}>

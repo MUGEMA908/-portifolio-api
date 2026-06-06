@@ -31,7 +31,7 @@ export default function Hero({ theme }) {
 
           {/* Name */}
           <h1 className="font-display font-black leading-[1.05] tracking-[0.02em] mb-2
-            text-[clamp(2.8rem,6.5vw,5rem)]
+            text-[clamp(1.8rem,4vw,3rem)]
             animate-[fadeUp_0.7s_0.1s_ease_both]">
             NIYONSABA<br />
             <span className="text-green-DEFAULT">Eugene</span>
