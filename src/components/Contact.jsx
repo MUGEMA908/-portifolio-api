@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
 
-const API = 'https://portifolio-1-vzyn.onrender.com'
+const API = 'https://portifolio-api-epr5.onrender.com'
 
 const track = (data) => fetch(`${API}/api/track/github-click`, {
   method: 'POST',

@@ -1,7 +1,7 @@
 import { useEffect, useRef } from 'react'
 import { projects } from '../data/portfolio'
 
-const API = 'https://portifolio-1-vzyn.onrender.com'
+const API = 'https://portifolio-api-epr5.onrender.com'
 
 const thumbBg = {
   green: 'bg-gradient-to-br from-[#071f12] via-[#0a3820] to-[#04120a]',
