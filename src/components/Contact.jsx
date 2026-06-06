@@ -17,7 +17,7 @@ const contactItems = [
 
 const socials = [
   { label: 'GitHub ↗', href: 'https://github.com/MUGEMA908' },
-  { label: 'LinkedIn ↗', href: 'https://www.linkedin.com/in/niyonsaba-eugene' },
+ { label: 'LinkedIn ↗', href: 'https://www.linkedin.com/in/niyonsaba-eugene-13b4b5408/' },
   { label: 'X (Twitter) ↗', href: 'https://twitter.com/eugeneandyleebom@gmail.com' },
   { label: 'Instagram ↗', href: 'https://instagram.com/bomberboi_originall' },
 ]
