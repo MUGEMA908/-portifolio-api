@@ -27,7 +27,7 @@ export default function Navbar({ theme, toggleTheme }) {
   const handleAdmin = () => {
     sessionStorage.removeItem('ne_token')
     sessionStorage.removeItem('ne_admin')
-    window.location.href = '/admin/'
+    window.location.href = 'https://portifolio-api-1iqy.vercel.app/'
   }
 
   return (
